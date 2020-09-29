@@ -1,0 +1,65 @@
+/**
+ * public class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
+ * }
+ * Given the root of a binary tree, return the postorder traversal of its nodes' values.
+ * <p>
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/binary-tree-postorder-traversal
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+public class 二叉树后序遍历_145 {
+    public static void main(String[] args) {
+        TreeNode leftNode = new TreeNode(5, null, null);
+        TreeNode rightNode = new TreeNode(23, null, null);
+        TreeNode node = new TreeNode(14, leftNode, rightNode);
+        postorderTraversal(node);
+    }
+
+    public static List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        while (current != null || !stack.isEmpty()) {
+            if (current != null) {
+                list.add(current.val);
+                stack.push(current);
+                current = current.right;
+            } else {
+                current = stack.pop();
+                current = current.left;
+            }
+        }
+
+
+        Collections.reverse(list);
+        System.out.println("postorderTraversal:" + list);
+        return list;
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode() {
+        }
+
+        public TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+}
+
+
